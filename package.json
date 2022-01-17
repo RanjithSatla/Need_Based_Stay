@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/RanjithSatla/Need_Based_Stay#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "dotenv": "^14.1.0",
+    "express": "^4.17.2",
+    "mongo": "^0.1.0",
+    "mongoose": "^6.1.6"
   }
 }
