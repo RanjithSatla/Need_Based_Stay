@@ -36,7 +36,7 @@ const login = (req, res, next) => {
         }
         //---end checking password compraison
       } else {
-        res.json("You've not been registered yet.Please do SignUp !!!");
+        res.json("You've not been registered as a user. Please do SignUp !!!");
       }
     } else {
       res.json(error);

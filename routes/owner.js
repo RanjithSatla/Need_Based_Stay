@@ -1,11 +1,14 @@
 const express = require("express");
 //controllers
-const userController = require("../controllers/userController");
+const ownerController = require("../controllers/ownerController");
 
 const router = express.Router();
+const Owner = require("../models/ownerModel");
 
 //user signup
-router.post("/owner/signup", userController.createOwner);
+router.post("/owner/signup", ownerController.createOwner);
 
 //user login
-router.get("/owner/login", userController.findOwner);
+router.post("/owner/login", ownerController.ownerLogin);
+
+module.exports = router;
