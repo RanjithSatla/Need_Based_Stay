@@ -19,18 +19,14 @@ const createUser = (req, res, next) => {
     userName: req.body.userName,
     password: req.body.password,
   });
-  user
-    .save()
-    .then((user) => {
-      res.json({
-        message: "user added successfully",
-      });
-    })
-    .catch((error) => {
-      res.json({
-        message: "An error occurred",
-      });
+  try {
+    const userData = user.save();
+    res.json(userData);
+  } catch (error) {
+    res.json({
+      message: "An error occurred",
     });
+  }
 };
 
 const login = (req, res, next) => {
@@ -60,4 +56,4 @@ const login = (req, res, next) => {
     }
   );
 };
-(module.exports = createUser), login;
+module.exports = { createUser, login };
