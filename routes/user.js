@@ -8,4 +8,4 @@ const router = express.Router();
 router.post("/user/signup", userController.createUser);
 
 //user login
-router.get("/user/login", userController.findUser);
+router.post("/user/login", userController.login);
