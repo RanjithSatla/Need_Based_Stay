@@ -11,9 +11,8 @@
     "type": "git",
     "url": "git+https://github.com/RanjithSatla/Need_Based_Stay.git"
   },
-  "engines":{
+  "engines": {
     "node": "16.13.0"
-
   },
   "author": "",
   "license": "ISC",
@@ -22,10 +21,12 @@
   },
   "homepage": "https://github.com/RanjithSatla/Need_Based_Stay#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^14.1.0",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "mongo": "^0.1.0",
     "mongoose": "^6.1.6",
     "parser": "^0.1.4"
