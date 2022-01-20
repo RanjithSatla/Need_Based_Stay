@@ -2,16 +2,8 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const createUser = (req, res, next) => {
-  // bcrypt.hash(req.body.password, 10, function(err, hashedPass){
-
-  // if (err) {
-  //     res.json({
-  //         error:err
-  //     })
-  // }
-  // })
-  let user = new User({
+const createUser = async (req, res, next) => {
+  const user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     emailId: req.body.emailId,
@@ -20,7 +12,8 @@ const createUser = (req, res, next) => {
     password: req.body.password,
   });
   try {
-    const userData = user.save();
+    const userData = await user.save();
+    console.log(userData);
     res.json(userData);
   } catch (error) {
     res.json({

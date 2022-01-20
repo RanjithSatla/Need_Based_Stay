@@ -6,6 +6,8 @@ const db = require("./config/db");
 const port = process.env.PORT || 3000;
 
 const userRoute = require("./routes/user");
+
+app.use(middlewares);
 app.use("/", userRoute);
 
 app.listen(port, () => {
