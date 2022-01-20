@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 const propertySchema = new mongoose.Schema({
   propertyName: String,
   propertyLocation: String,
-  propertyType: Number,
+  propertyType: {
+    type: String,
+    enum: ["Rent", "PG"],
+    default: "Rent",
+  },
   locationType: String,
   phoneNumber: Number,
   PriceRange: Number,
