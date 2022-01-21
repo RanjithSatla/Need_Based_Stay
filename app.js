@@ -10,8 +10,8 @@ const userRoute = require("./routes/user");
 const ownerRoute = require("./routes/owner");
 
 app.use(middlewares);
-app.use((req, res) => {
-  res.send("hello from backend server2");
+app.use("/api", (req, res) => {
+  res.send("hello from backend server");
 });
 app.use("/", userRoute);
 app.use("/", ownerRoute);
