@@ -5,13 +5,14 @@ const db = require("./config/db");
 
 const port = process.env.PORT || 3000;
 
-
 //routes
 const userRoute = require("./routes/user");
 const ownerRoute = require("./routes/owner");
 
-
 app.use(middlewares);
+app.use((req, res) => {
+  res.send("hello from backend server2");
+});
 app.use("/", userRoute);
 app.use("/", ownerRoute);
 
