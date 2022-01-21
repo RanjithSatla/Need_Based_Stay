@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/RanjithSatla/Need_Based_Stay#readme",
   "dependencies": {
+    "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
     "body": "^5.1.0",
     "body-parser": "^1.19.1",
