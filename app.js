@@ -3,7 +3,7 @@ const app = express();
 const { middlewares } = require("./middlewares");
 const db = require("./config/db");
 
-const port = process.env.PORT || 3000;
+// const port = process.env.PORT || 3000;
 
 //routes
 const userRoute = require("./routes/user");
@@ -16,6 +16,11 @@ app.use("/api", (req, res) => {
 app.use("/", userRoute);
 app.use("/", ownerRoute);
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
+const server = app.listen(process.env.PORT || 5000, () => {
+  const port = server.address().port;
+  console.log(`Express is working on port ${port}`);
 });
+
+// app.listen(port, () => {
+//   console.log(`listening on port ${port}`);
+// });
