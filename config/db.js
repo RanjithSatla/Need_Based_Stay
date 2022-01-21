@@ -1,14 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config();
 
-const DB_PASS = process.env.db_pass;
+// const DB_PASS = process.env.db_pass;
 
-const CONNECTION_URL =
-  `mongodb+srv://ranjith:` +
-  DB_PASS +
-  `@capstone.pacon.mongodb.net/ms?retryWrites=true&w=majority`;
-
+const CONNECTION_URL = process.env.mongo_url;
 //Connect to DB:
 mongoose.connect(CONNECTION_URL, {
   useNewUrlParser: true,
