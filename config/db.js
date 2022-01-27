@@ -9,6 +9,7 @@ const CONNECTION_URL = process.env.mongo_url;
 //Connect to DB:
 mongoose.connect(CONNECTION_URL, {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 //Handle:
@@ -16,6 +17,7 @@ const con = mongoose.connection;
 
 con.on("open", () => {
   console.log("Connected");
+  console.log(CONNECTION_URL);
 });
 
 module.exports = mongoose;

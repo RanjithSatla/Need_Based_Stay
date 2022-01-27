@@ -1,6 +1,6 @@
 const express = require("express");
 //controllers
-const listingProperty = require("../controllers/listingProperty");
+const listingProperty = require("../controllers/propertyController");
 
 const router = express.Router();
 const Property = require("../models/PropertyModel");
