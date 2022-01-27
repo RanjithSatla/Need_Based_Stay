@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const propertySchema = new mongoose.Schema({
   propertyName: String,
   propertyLocation: String,
@@ -10,11 +11,12 @@ const propertySchema = new mongoose.Schema({
   },
   locationType: String,
   phoneNumber: Number,
-  PriceRange: Number,
+  priceRange: Number,
   uploadImages: {
     data: Buffer,
     contentType: String,
   },
   description: String,
+  
 });
-module.exports = mongoose.model("OwnerProperty", propertySchema);
+module.exports = mongoose.model("Property", propertySchema);

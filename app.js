@@ -8,6 +8,7 @@ const db = require("./config/db");
 //routes
 const userRoute = require("./routes/user");
 const ownerRoute = require("./routes/owner");
+const propertyRoute = require("./routes/property")
 
 app.use(middlewares);
 app.use("/api", (req, res) => {
@@ -15,6 +16,7 @@ app.use("/api", (req, res) => {
 });
 app.use("/", userRoute);
 app.use("/", ownerRoute);
+app.use("/", propertyRoute);
 
 const server = app.listen(process.env.PORT || 5000, () => {
   const port = server.address().port;
