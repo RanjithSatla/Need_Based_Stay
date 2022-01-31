@@ -13,6 +13,7 @@ const createUser = async (req, res, next) => {
     const userData = await user.save();
     console.log(userData);
     res.json(userData);
+    
   } catch (error) {
     res.json({
       message: "An error occurred",
@@ -31,6 +32,7 @@ const login = (req, res, next) => {
         if (foundUser.password == password) {
           //password matches
           res.json("Content Page");
+          
         } else {
           res.json("Check your password !!!");
         }

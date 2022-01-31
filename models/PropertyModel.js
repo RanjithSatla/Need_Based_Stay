@@ -20,7 +20,7 @@ const propertySchema = new mongoose.Schema({
   },
   uploadImages: {
     data: Buffer,
-    contentType: String,
+    contentType: String // ('image/png'),
   },
   description: String,
 });
