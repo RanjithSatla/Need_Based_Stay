@@ -2,12 +2,12 @@ const Owner = require("../models/ownerModel");
 
 const createOwner = async (req, res, next) => {
   const owner = new Owner({
-    firstName:      req.body.firstName,
-    lastName:       req.body.lastName,
-    emailId:        req.body.emailId,
-    phoneNumber:    req.body.phoneNumber,
-    userName:       req.body.userName,
-    password:       req.body.password,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    emailId: req.body.emailId,
+    phoneNumber: req.body.phoneNumber,
+    userName: req.body.userName,
+    password: req.body.password,
   });
   try {
     const ownerData = await owner.save();
