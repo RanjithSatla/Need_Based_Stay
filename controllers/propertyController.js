@@ -8,7 +8,12 @@ const createProperty = async (req, res, next) => {
     propertyType: req.body.propertyType,
     locationType: req.body.locationType,
     phoneNumber: req.body.phoneNumber,
+    gender: req.body.gender,
+    preference: req.body.preference,
+    roomType: req.body.roomType,
+    houseType: req.body.houseType,
     priceRange: req.body.priceRange,
+    houseFor: req.body.houseFor,
     uploadImages: req.body.uploadImages,
     description: req.body.description,
   });

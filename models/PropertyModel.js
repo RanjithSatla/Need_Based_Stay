@@ -10,6 +10,31 @@ const propertySchema = new mongoose.Schema({
   },
   locationType: String,
   phoneNumber: Number,
+  gender: {
+    type: String,
+    enum: ["male", "female"],
+    default: "male",
+  },
+  preference: {
+    type: String,
+    enum: ["professionals", "students"],
+    default: "students",
+  },
+  roomType: {
+    type: String,
+    enum: ["single share", "two share", "three share", "four share"],
+    default: "single share",
+  },
+  houseType: {
+    type: String,
+    enum: ["1st floor", "2nd Floor", "3rd Floor", "flat", "independent"],
+    default: "Rent",
+  },
+  houseFor: {
+    type: String,
+    enum: ["bachelor's", "family"],
+    default: "family",
+  },
   priceRange: {
     type: JSON,
     range: {
@@ -20,7 +45,7 @@ const propertySchema = new mongoose.Schema({
   },
   uploadImages: {
     data: Buffer,
-    contentType: String // ('image/png'),
+    contentType: String, // ('image/png'),
   },
   description: String,
 });
