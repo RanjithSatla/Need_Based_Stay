@@ -5,8 +5,8 @@ const propertySchema = new mongoose.Schema({
   propertyLocation: String,
   propertyType: {
     type: String,
-    enum: ["Rent", "PG"],
-    default: "Rent",
+    enum: ["House", "PG"],
+    default: "House",
   },
   locationType: String,
   phoneNumber: Number,
