@@ -30,17 +30,18 @@ const genderFilter = (req, res) => {
 };
 
 // Prefered for
-const locationFilter = (req, res) => {
-  const location = req.body.location;
+const locationFilter = async (req, res, next) => {
+  const location = await req.body.location;
   const query = Property.find({ propertyLocation: location })
     // .where("propertyLocation")
     // .equals("Uppal")
-    .select("propertyName propertyLocation uploadImage description")
+    //.select("propertyName propertyLocation uploadImage description")
+
     .exec(function (err, Property) {
       if (err) return handleError(err);
       else {
-        res.json(Property);
-        res.send(Property);
+        return res.send(Property);
+        // res.json(Property);
       }
     });
 };
