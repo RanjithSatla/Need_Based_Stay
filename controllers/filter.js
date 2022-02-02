@@ -14,6 +14,13 @@ const filterAll = (req, res, next) => {
     houseType: req.body.houseType,
     houseFor: req.body.houseFor,
   };
+  for (const key in filter) {
+    if (filter[key] === undefined) {
+      delete filter[key];
+    }
+  }
+
+  console.log(filter);
   const query = Property.find(filter)
     .select("propertyName propertyLocation uploadImages gender description")
     .exec(function (err, Property) {
