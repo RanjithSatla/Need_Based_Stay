@@ -4,8 +4,7 @@ const filter = require("../controllers/filter");
 
 const router = express.Router();
 
-router.get("/gender", filter.genderFilter);
+router.get("/filter", filter.filterAll);
 router.get("/locationFilter", filter.locationFilter);
-router.get("/roomTypeTest", filter.roomTypeFilter);
 
 module.exports = router;

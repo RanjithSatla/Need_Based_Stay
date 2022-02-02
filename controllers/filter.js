@@ -4,29 +4,25 @@ const Property = require("../models/PropertyModel");
 // Filter controller
 
 // Gender Filter
-const genderFilter = (req, res) => {
-  // const genderReq = "female";
+const filterAll = (req, res) => {
   const filter = {
-    gender: "female",
+    propertyType: req.body.propertyType,
+    propertyLocation: req.body.propertyLocation,
+    gender: req.body.gender,
+    preference: req.body.preference,
+    roomType: req.body.roomType,
+    houseType: req.body.houseType,
+    houseFor: req.body.houseFor,
   };
-  const query = Property.find()
-    .where("filter")
-    .equals(filter)
-    .select("propertyName propertyLocation uploadImage description")
+  const query = Property.find(filter)
+    .select("propertyName propertyLocation uploadImages gender description")
     .exec(function (err, Property) {
       if (err) return handleError(err);
       else {
-        console.log(filter);
-        console.log(filter);
-        res.json(Property);
-        // res.send(Property);
+        // res.json(Property);
+        return res.send(Property);
       }
     });
-
-  // const cursor = db.collection("Property").find({
-  //   gender: "male",
-  // });
-  // console.log(cursor);
 };
 
 // Prefered for
@@ -46,6 +42,4 @@ const locationFilter = async (req, res, next) => {
     });
 };
 
-// Room Type Filter
-const roomTypeFilter = async (req, res) => {};
-module.exports = { genderFilter, locationFilter, roomTypeFilter };
+module.exports = { filterAll, locationFilter };

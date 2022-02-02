@@ -17,7 +17,7 @@ const con = mongoose.connection;
 
 con.on("open", () => {
   console.log("Connected");
-  console.log(CONNECTION_URL);
+  // console.log(CONNECTION_URL);
 });
 
 module.exports = mongoose;
