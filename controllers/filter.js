@@ -4,7 +4,7 @@ const Property = require("../models/PropertyModel");
 // Filter controller
 
 // Gender Filter
-const filterAll = (req, res) => {
+const filterAll = (req, res, next) => {
   const filter = {
     propertyType: req.body.propertyType,
     propertyLocation: req.body.propertyLocation,
@@ -19,8 +19,8 @@ const filterAll = (req, res) => {
     .exec(function (err, Property) {
       if (err) return handleError(err);
       else {
-        // res.json(Property);
-        return res.send(Property);
+        return res.json(Property);
+        // res.send(Property);
       }
     });
 };
@@ -36,8 +36,8 @@ const locationFilter = async (req, res, next) => {
     .exec(function (err, Property) {
       if (err) return handleError(err);
       else {
-        return res.send(Property);
-        // res.json(Property);
+        // res.send(Property);
+        return res.json(Property);
       }
     });
 };

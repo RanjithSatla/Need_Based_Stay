@@ -12,18 +12,18 @@ const propertyRoute = require("./routes/property");
 const filterRoute = require("./routes/filterRoute");
 
 app.use(middlewares);
-app.use("/api", (req, res) => {
+app.use("/api", (req, res, next) => {
   res.send("hello from backend server");
+  next();
 });
 app.use("/", userRoute);
 app.use("/", ownerRoute);
 app.use("/", propertyRoute);
-app.use("/",filterRoute);
+app.use("/", filterRoute);
 
-
-app.get('/', (req, res) => {
-  res.send('Hello from the other side of the world.');
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello from the other side of the world.");
+// });
 
 const server = app.listen(process.env.PORT || 5000, () => {
   const port = server.address().port;
