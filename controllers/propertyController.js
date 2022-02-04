@@ -15,6 +15,7 @@ const createProperty = async (req, res, next) => {
     priceRange: req.body.priceRange,
     houseFor: req.body.houseFor,
     uploadImages: req.body.uploadImages,
+    nearBy: req.body.nearBy,
     description: req.body.description,
   });
   try {
