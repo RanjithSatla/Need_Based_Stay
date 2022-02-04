@@ -27,18 +27,11 @@ const createProperty = async (req, res, next) => {
     res.json({ message: "an error occurred" });
   }
 };
-// updateProperty
-// const updateProperty = async (req, res, next) =>{
 
-// }
 
-// const property = await Property
 
-//get all properties
 
-// deleteProperty
-// const deleteProperty = async (req, res, next) =>{
 
-// }
 
-module.exports = { createProperty };
+
+module.exports = { createProperty, getProperty };

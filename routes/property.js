@@ -9,4 +9,5 @@ const Property = require("../models/PropertyModel");
 router.post("/owner/listproperty", listingProperty.createProperty);
 router.get("/pg");
 
+
 module.exports = router;
