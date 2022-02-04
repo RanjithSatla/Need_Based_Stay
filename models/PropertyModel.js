@@ -8,7 +8,11 @@ const propertySchema = new mongoose.Schema({
     enum: ["House", "PG"],
     default: "House",
   },
-  locationType: String,
+  locationType: {
+    type: String,
+    enum: ["city", "outskirts"],
+    default: "city",
+  },
   phoneNumber: Number,
   gender: {
     type: String,
@@ -27,8 +31,15 @@ const propertySchema = new mongoose.Schema({
   },
   houseType: {
     type: String,
-    enum: ["1st floor", "2nd Floor", "3rd Floor", "flat", "independent"],
-    default: "Rent",
+    enum: [
+      "1st floor",
+      "2nd Floor",
+      "3rd Floor",
+      "flat",
+      "independent",
+      "gated community",
+    ],
+    default: "flat",
   },
   houseFor: {
     type: String,
@@ -46,6 +57,16 @@ const propertySchema = new mongoose.Schema({
   uploadImages: {
     data: Buffer,
     contentType: String, // ('image/png'),
+  },
+  nearBy: {
+    type: Array,
+    tags: [
+      "airport",
+      "parks",
+      "health care",
+      "shopping hubs",
+      "fitness centers",
+    ],
   },
   description: String,
 });

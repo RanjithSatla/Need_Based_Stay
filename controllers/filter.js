@@ -8,11 +8,14 @@ const filterAll = (req, res, next) => {
   const filter = {
     propertyType: req.body.propertyType,
     propertyLocation: req.body.propertyLocation,
+    locationType: req.body.locationType,
     gender: req.body.gender,
     preference: req.body.preference,
     roomType: req.body.roomType,
     houseType: req.body.houseType,
     houseFor: req.body.houseFor,
+    nearBy: { $in: req.body.nearBy },
+    description: req.body.description,
   };
   for (const key in filter) {
     if (filter[key] === undefined) {
@@ -20,16 +23,38 @@ const filterAll = (req, res, next) => {
     }
   }
 
-  console.log(filter);
+  console.log(filter.nearBy);
+
   const query = Property.find(filter)
-    .select("propertyName propertyLocation uploadImages gender description")
+    .select("propertyName propertyLocation  uploadImages gender description")
     .exec(function (err, Property) {
       if (err) return handleError(err);
       else {
+        console.log(Property);
         return res.json(Property);
         // res.send(Property);
       }
     });
+  // } else {
+  //   const near = filter.nearBy;
+  //   console.log(near);
+  //   delete filter.nearBy;
+  //   const nearBy = near;
+  //   console.log(filter);
+  //   console.log(nearBy);
+  //   const query = Property.find(filter, {
+  //     nearBy: { $in: ["airport", "parks"] },
+  //   })
+  //     .select("propertyName propertyLocation  uploadImages gender description")
+  //     .exec(function (err, Property) {
+  //       if (err) return handleError(err);
+  //       else {
+  //         console.log(Property);
+  //         return res.json(Property);
+  //         // res.send(Property);
+  //       }
+  //     });
+  // }
 };
 
 // Prefered for
