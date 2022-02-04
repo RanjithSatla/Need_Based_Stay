@@ -24,7 +24,7 @@ const createUser = async (req, res, next) => {
 const login = (req, res, next) => {
   var username = req.body.username;
   var password = req.body.password;
-
+ 
   User.findOne({ userName: username }, function (error, foundUser) {
     if (!error) {
       if (foundUser) {
@@ -45,4 +45,5 @@ const login = (req, res, next) => {
     }
   });
 };
+
 module.exports = { createUser, login };
