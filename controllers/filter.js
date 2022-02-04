@@ -26,7 +26,9 @@ const filterAll = (req, res, next) => {
   console.log(filter.nearBy);
 
   const query = Property.find(filter)
-    .select("propertyName propertyLocation  uploadImages gender description")
+    .select(
+      "propertyName propertyLocation  uploadImages gender nearBy description"
+    )
     .exec(function (err, Property) {
       if (err) return handleError(err);
       else {
@@ -63,7 +65,7 @@ const locationFilter = async (req, res, next) => {
   const query = Property.find({ propertyLocation: location })
     // .where("propertyLocation")
     // .equals("Uppal")
-    //.select("propertyName propertyLocation uploadImage description")
+    //.select("propertyName propertyLocation uploadImage nearBy description")
 
     .exec(function (err, Property) {
       if (err) return handleError(err);

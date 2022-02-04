@@ -18,6 +18,7 @@ const createProperty = async (req, res, next) => {
     nearBy: req.body.nearBy,
     description: req.body.description,
   });
+  console.log(property);
   try {
     const propertyData = await property.save();
     console.log(propertyData);
@@ -28,10 +29,4 @@ const createProperty = async (req, res, next) => {
   }
 };
 
-
-
-
-
-
-
-module.exports = { createProperty, getProperty };
+module.exports = { createProperty };
