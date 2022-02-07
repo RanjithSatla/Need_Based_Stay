@@ -2,9 +2,9 @@ const Property = require("../models/PropertyModel");
 
 //createProperty
 const createProperty = async (req, res, next) => {
-  if (!ownerLogin) {
-    return res.status(422).json({ message: "owner should be logged in" });
-  }
+  // if (!ownerLogin) {
+  //   return res.status(422).json({ message: "owner should be logged in" });
+  // }
 
   const property = new Property({
     propertyName: req.body.propertyName,

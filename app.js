@@ -20,7 +20,7 @@ app.use("/", userRoute);
 app.use("/", ownerRoute);
 app.use("/", propertyRoute);
 app.use("/", filterRoute);
-app.use("/", bookingRoute);
+// app.use("/", bookingRoute);
 
 // app.get("/", (req, res) => {
 //   res.send("Hello from the other side of the world.");
