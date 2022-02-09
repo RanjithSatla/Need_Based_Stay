@@ -25,12 +25,20 @@ const filterAll = (req, res, next) => {
     }
   }
 
-  console.log(filter.nearBy);
+  console.log(filter);
+
+  //Pagination
+  const pageOptions = {
+    page: parseInt(req.query.page, 10) || 0,
+    limit: parseInt(req.query.limit, 10) || 10,
+  };
 
   const query = Property.find(filter)
     .select(
       "propertyName propertyLocation  uploadImages gender nearBy description"
     )
+    .skip(pageOptions.page * pageOptions.limit)
+    .limit(pageOptions.limit)
     .exec()
     .then((Property) => {
       if (Property.length > 0) {
@@ -54,8 +62,17 @@ const filterAll = (req, res, next) => {
 // Filter based on location
 
 const locationFilter = async (req, res, next) => {
-  const location = await req.body.location;
+  const location = await req.body.propertyLocation;
+  console.log(location);
+  //Pagination
+  const pageOptions = {
+    page: parseInt(req.query.page, 10) || 0,
+    limit: parseInt(req.query.limit, 10) || 10,
+  };
+
   const query = Property.find({ propertyLocation: location })
+    .skip(pageOptions.page * pageOptions.limit)
+    .limit(pageOptions.limit)
     .exec()
     .then((Property) => {
       if (Property.length > 0) {
