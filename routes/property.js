@@ -7,7 +7,7 @@ const Property = require("../models/PropertyModel");
 
 //createProperty
 router.post("/owner/listproperty", listingProperty.createProperty);
-router.get("/pg");
-
+router.patch("/property/:propertyId", listingProperty.updateProperty);
+router.delete("/property/:propertyId", listingProperty.deleteProperty);
 
 module.exports = router;

@@ -25,11 +25,50 @@ const createProperty = async (req, res, next) => {
   try {
     const propertyData = await property.save();
     console.log(propertyData);
-    res.json(propertyData);
+    res.status(201).json({
+      message: "Handling Post requests to /listProperty",
+      CreatedProperty: propertyData,
+    });
   } catch (error) {
     console.log("error");
-    res.json({ message: "an error occurred" });
+    res.status(500).json({ message: "an error occurred", error: error });
   }
 };
 
-module.exports = { createProperty };
+const updateProperty = (req, res, next) => {
+  const id = req.params.propertyId;
+  console.log(id);
+  const updateOps = {};
+  for (const ops of req.body) {
+    updateOps[ops.propName] = ops.value;
+  }
+  Property.updateOne({ _id: id }, { $set: updateOps })
+    .exec()
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+const deleteProperty = (req, res, next) => {
+  const id = req.params.propertyId;
+  console.log(id);
+  Property.remove({ _id: id })
+    .exec()
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+module.exports = { createProperty, updateProperty, deleteProperty };

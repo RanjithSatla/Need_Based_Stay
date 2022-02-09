@@ -3,7 +3,8 @@ const Property = require("../models/PropertyModel");
 
 // Filter controller
 
-// Gender Filter
+//Filter based on needs
+
 const filterAll = (req, res, next) => {
   const filter = {
     propertyType: req.body.propertyType,
@@ -17,6 +18,7 @@ const filterAll = (req, res, next) => {
     nearBy: { $in: req.body.nearBy },
     description: req.body.description,
   };
+
   for (const key in filter) {
     if (filter[key] === undefined) {
       delete filter[key];
@@ -29,50 +31,50 @@ const filterAll = (req, res, next) => {
     .select(
       "propertyName propertyLocation  uploadImages gender nearBy description"
     )
-    .exec(function (err, Property) {
-      if (err) return handleError(err);
-      else {
+    .exec()
+    .then((Property) => {
+      if (Property.length > 0) {
         console.log(Property);
-        return res.json(Property);
-        // res.send(Property);
+        return res.status(200).json({
+          message: "Properties found based on the needs",
+          Properties: Property,
+        });
+      } else {
+        res.status(404).json({ message: "No Properties found" });
       }
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        error: err,
+      });
     });
-  // } else {
-  //   const near = filter.nearBy;
-  //   console.log(near);
-  //   delete filter.nearBy;
-  //   const nearBy = near;
-  //   console.log(filter);
-  //   console.log(nearBy);
-  //   const query = Property.find(filter, {
-  //     nearBy: { $in: ["airport", "parks"] },
-  //   })
-  //     .select("propertyName propertyLocation  uploadImages gender description")
-  //     .exec(function (err, Property) {
-  //       if (err) return handleError(err);
-  //       else {
-  //         console.log(Property);
-  //         return res.json(Property);
-  //         // res.send(Property);
-  //       }
-  //     });
-  // }
 };
 
-// Prefered for
+// Filter based on location
+
 const locationFilter = async (req, res, next) => {
   const location = await req.body.location;
   const query = Property.find({ propertyLocation: location })
-    // .where("propertyLocation")
-    // .equals("Uppal")
-    //.select("propertyName propertyLocation uploadImage nearBy description")
-
-    .exec(function (err, Property) {
-      if (err) return handleError(err);
-      else {
-        // res.send(Property);
-        return res.json(Property);
+    .exec()
+    .then((Property) => {
+      if (Property.length > 0) {
+        console.log(Property);
+        return res.status(200).json({
+          message: "Properties based on the given location",
+          Properties: Property,
+        });
+      } else {
+        res
+          .status(404)
+          .json({ message: "No Properties found in this location" });
       }
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        error: err,
+      });
     });
 };
 
