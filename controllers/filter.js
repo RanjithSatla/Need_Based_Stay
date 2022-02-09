@@ -61,13 +61,13 @@ const locationFilter = async (req, res, next) => {
       if (Property.length > 0) {
         console.log(Property);
         return res.status(200).json({
-          message: "Properties based on the given location",
+          message: `Properties based on the location: ${location}`,
           Properties: Property,
         });
       } else {
-        res
-          .status(404)
-          .json({ message: "No Properties found in this location" });
+        res.status(404).json({
+          message: `No Properties found in ${location}`,
+        });
       }
     })
     .catch((err) => {

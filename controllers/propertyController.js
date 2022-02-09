@@ -1,11 +1,8 @@
 const Property = require("../models/PropertyModel");
 
-//createProperty
-const createProperty = async (req, res, next) => {
-  // if (!ownerLogin) {
-  //   return res.status(422).json({ message: "owner should be logged in" });
-  // }
+//create Property :
 
+const createProperty = async (req, res, next) => {
   const property = new Property({
     propertyName: req.body.propertyName,
     propertyLocation: req.body.propertyLocation,
@@ -35,6 +32,8 @@ const createProperty = async (req, res, next) => {
   }
 };
 
+// Update Property :
+
 const updateProperty = (req, res, next) => {
   const id = req.params.propertyId;
   console.log(id);
@@ -54,6 +53,8 @@ const updateProperty = (req, res, next) => {
       });
     });
 };
+
+// Delete Property :
 
 const deleteProperty = (req, res, next) => {
   const id = req.params.propertyId;
