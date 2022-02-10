@@ -12,6 +12,8 @@ mongoose.connect(CONNECTION_URL, {
   useUnifiedTopology: true,
 });
 
+mongoose.Promise = global.Promise;
+
 //Handle:
 const con = mongoose.connection;
 

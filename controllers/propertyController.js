@@ -23,7 +23,7 @@ const createProperty = async (req, res, next) => {
     const propertyData = await property.save();
     console.log(propertyData);
     res.status(201).json({
-      message: "Handling Post requests to /listProperty",
+      message: "Listed your property successfully.",
       CreatedProperty: propertyData,
     });
   } catch (error) {
@@ -33,6 +33,26 @@ const createProperty = async (req, res, next) => {
 };
 
 // Update Property :
+
+const individualProperty = (req, res, next) => {
+  const id = req.params.propertyId;
+  console.log(id);
+
+  Property.find({ _id: id })
+    .exec()
+    .then((Property) => {
+      res.status(200).json({
+        message: "Here is the property details :",
+        Property,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        error: err,
+      });
+    });
+};
 
 const updateProperty = (req, res, next) => {
   const id = req.params.propertyId;
@@ -44,7 +64,10 @@ const updateProperty = (req, res, next) => {
   Property.updateOne({ _id: id }, { $set: updateOps })
     .exec()
     .then((result) => {
-      res.status(200).json(result);
+      res.status(200).json({
+        message: "Updated Property details successfully",
+        result,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -62,7 +85,10 @@ const deleteProperty = (req, res, next) => {
   Property.remove({ _id: id })
     .exec()
     .then((result) => {
-      res.status(200).json(result);
+      res.status(200).json({
+        message: "Deleted Property details successfully",
+        result,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -72,4 +98,9 @@ const deleteProperty = (req, res, next) => {
     });
 };
 
-module.exports = { createProperty, updateProperty, deleteProperty };
+module.exports = {
+  createProperty,
+  individualProperty,
+  updateProperty,
+  deleteProperty,
+};

@@ -1,21 +1,21 @@
-const mongoose = require("mongoose");
-const bookingSchema = new mongoose.Schema(
-    {
-      userId: 
-            { 
-                type:String, 
-                ref: 'User',
-                required:true 
-            },
-      properties: 
-          {
-              propertyId: { type: Object, required:true },
-          },
-      
-      amount: { type: Number, required:true},
-      paymentType: { type: String, default: "online_payment"},
+// const mongoose = require("mongoose");
+// const bookingSchema = new mongoose.Schema(
+//     {
+//       userId:
+//             {
+//                 type:String,
+//                 ref: 'User',
+//                 required:true
+//             },
+//       properties:
+//           {
+//               propertyId: { type: Object, required:true },
+//           },
 
-      status: { type: String, default: "order_placed"},
+//       amount: { type: Number, required:true},
+//       paymentType: { type: String, default: "online_payment"},
 
-}),
-module.exports = mongoose.model("Booking", bookingSchema);
+//       status: { type: String, default: "order_placed"},
+
+// }),
+// module.exports = mongoose.model("Booking", bookingSchema);

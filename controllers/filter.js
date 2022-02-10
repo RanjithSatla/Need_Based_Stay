@@ -43,10 +43,32 @@ const filterAll = (req, res, next) => {
     .then((Property) => {
       if (Property.length > 0) {
         console.log(Property);
-        return res.status(200).json({
-          message: "Properties found based on the needs",
-          Properties: Property,
-        });
+        const response = {
+          count: Property.length,
+          Properties: Property.map((Property) => {
+            return {
+              propertyType: Property.propertyType,
+              propertyLocation: Property.propertyLocation,
+              locationType: Property.locationType,
+              gender: Property.gender,
+              preference: Property.preference,
+              roomType: Property.roomType,
+              houseType: Property.houseType,
+              houseFor: Property.houseFor,
+              nearBy: { $in: Property.nearBy },
+              description: Property.description,
+              _id: Property._id,
+              request: {
+                type: "GET",
+                url:
+                  "https://need-based-stay.herokuapp.com/property/" +
+                  Property._id,
+              },
+            };
+          }),
+        };
+        console.log(response);
+        return res.status(200).json(response);
       } else {
         res.status(404).json({ message: "No Properties found" });
       }
@@ -77,9 +99,33 @@ const locationFilter = async (req, res, next) => {
     .then((Property) => {
       if (Property.length > 0) {
         console.log(Property);
+        const response = {
+          count: Property.length,
+          Properties: Property.map((Property) => {
+            return {
+              propertyType: Property.propertyType,
+              propertyLocation: Property.propertyLocation,
+              locationType: Property.locationType,
+              gender: Property.gender,
+              preference: Property.preference,
+              roomType: Property.roomType,
+              houseType: Property.houseType,
+              houseFor: Property.houseFor,
+              nearBy: { $in: Property.nearBy },
+              description: Property.description,
+              _id: Property._id,
+              request: {
+                type: "GET",
+                url:
+                  "https://need-based-stay.herokuapp.com/property/" +
+                  Property._id,
+              },
+            };
+          }),
+        };
         return res.status(200).json({
           message: `Properties based on the location: ${location}`,
-          Properties: Property,
+          response,
         });
       } else {
         res.status(404).json({
