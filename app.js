@@ -10,8 +10,10 @@ const userRoute = require("./routes/user");
 const ownerRoute = require("./routes/owner");
 const propertyRoute = require("./routes/property");
 const filterRoute = require("./routes/filterRoute");
+// console.log(middlewares);
 
 app.use(middlewares);
+
 app.use("/api", (req, res, next) => {
   res.status(200).json({
     message: "Hello from Backend Server",
