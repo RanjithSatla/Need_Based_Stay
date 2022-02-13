@@ -5,6 +5,8 @@ const Property = require("../models/PropertyModel");
 const createProperty = async (req, res, next) => {
   const property = new Property({
     propertyName: req.body.propertyName,
+    location: req.body.location,
+    // [(lat = req.body.lat), (lang = req.body.lng)],
     propertyLocation: req.body.propertyLocation,
     propertyType: req.body.propertyType,
     locationType: req.body.locationType,
@@ -82,7 +84,7 @@ const updateProperty = (req, res, next) => {
 const deleteProperty = (req, res, next) => {
   const id = req.params.propertyId;
   console.log(id);
-  Property.remove({ _id: id })
+  Property.deleteOne({ _id: id })
     .exec()
     .then((result) => {
       res.status(200).json({

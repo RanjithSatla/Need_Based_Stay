@@ -22,8 +22,12 @@ const filterAll = (req, res, next) => {
   for (const key in filter) {
     if (filter[key] === undefined) {
       delete filter[key];
+    } else if (filter.nearBy[key] === undefined) {
+      delete filter.nearBy[key];
+      delete filter.nearBy;
     }
   }
+  console.log(filter.nearBy);
 
   console.log(filter);
 
@@ -67,7 +71,7 @@ const filterAll = (req, res, next) => {
             };
           }),
         };
-        console.log(response);
+        // console.log(response);
         return res.status(200).json(response);
       } else {
         res.status(404).json({ message: "No Properties found" });
@@ -84,15 +88,27 @@ const filterAll = (req, res, next) => {
 // Filter based on location
 
 const locationFilter = async (req, res, next) => {
-  const location = await req.body.propertyLocation;
+  const location = await req.body.location;
   console.log(location);
+  const lat = location.coordinates[0];
+  const lang = location.coordinates[1];
   //Pagination
   const pageOptions = {
     page: parseInt(req.query.page, 10) || 0,
     limit: parseInt(req.query.limit, 10) || 10,
   };
 
-  const query = Property.find({ propertyLocation: location })
+  const query = Property.find({
+    location: {
+      $near: {
+        $maxDistance: 10000, //$maxDistance” is the distance in meters from the longitude and latitude values.
+        $geometry: {
+          type: "Point",
+          coordinates: [lat, lang],
+        },
+      },
+    },
+  })
     .skip(pageOptions.page * pageOptions.limit)
     .limit(pageOptions.limit)
     .exec()
@@ -103,6 +119,7 @@ const locationFilter = async (req, res, next) => {
           count: Property.length,
           Properties: Property.map((Property) => {
             return {
+              propertyName: Property.propertyName,
               propertyType: Property.propertyType,
               propertyLocation: Property.propertyLocation,
               locationType: Property.locationType,
@@ -124,7 +141,7 @@ const locationFilter = async (req, res, next) => {
           }),
         };
         return res.status(200).json({
-          message: `Properties based on the location: ${location}`,
+          message: `Properties based on the Coordinates: ${[lat, lang]}`,
           response,
         });
       } else {

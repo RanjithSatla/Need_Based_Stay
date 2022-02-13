@@ -1,5 +1,15 @@
 const mongoose = require("mongoose");
 
+const geoSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    default: "Point",
+  },
+  coordinates: {
+    type: [Number],
+  },
+});
+
 const propertySchema = new mongoose.Schema({
   propertyName: String,
   propertyLocation: String,
@@ -7,6 +17,10 @@ const propertySchema = new mongoose.Schema({
     type: String,
     enum: ["House", "PG"],
     default: "House",
+  },
+  location: {
+    type: geoSchema,
+    index: "2dsphere",
   },
   locationType: {
     type: String,

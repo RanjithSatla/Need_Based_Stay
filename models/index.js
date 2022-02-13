@@ -4,6 +4,5 @@ const db = {};
 db.mongoose = mongoose;
 db.user = require("./userModel");
 db.role = require("./roleModel");
-db.ROLES = ["user", "owner","admin"];
+db.ROLES = ["user", "owner", "admin"];
 module.exports = db;
-
