@@ -1,8 +1,9 @@
 const jwt = require("jsonwebToken");
 const config = require("../config/authConfig");
-const User = require("../models/userModel");
-
-verifyToken = (req, res, next) => {
+const db = require("../models");
+const User = db.user;
+const Role = db.role;
+const verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
   if (!token) {
     return res.status(403).send({ message: "No token provided!" });
@@ -15,7 +16,34 @@ verifyToken = (req, res, next) => {
     next();
   });
 };
-isAdmin = (req, res, next) => {
+const isOwner = (req, res, next) => {
+  User.findById(req.userId).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    Role.find(
+      {
+        _id: { $in: user.roles },
+      },
+      (err, roles) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        for (let i = 0; i < roles.length; i++) {
+          if (roles[i].name === "owner") {
+            next();
+            return;
+          }
+        }
+        res.status(403).send({ message: "Require Owner Role!" });
+        return;
+      }
+    );
+  });
+};
+ const isAdmin = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
@@ -36,39 +64,14 @@ isAdmin = (req, res, next) => {
             return;
           }
         }
-        res.status(403).send({ message: "Require Admin Role!" });
-        return;
       }
-    );
+    )
   });
 };
-isModerator = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    Role.find(
-      {
-        _id: { $in: user.roles },
-      },
-      (err, roles) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "moderator") {
-            next();
-            return;
-          }
-        }
-      );
-    });
-  };
   const authJwt = {
     verifyToken,
-    isAdmin,
-    isModerator
+    isOwner,
+    isAdmin
   };
-  module.authJwt = authJwt();
+
+  module.exports = authJwt;
