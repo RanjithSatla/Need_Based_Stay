@@ -1,3 +1,3 @@
 module.exports = {
-    secret: "need stay-secret-key"
+    secret: "need-secret-key"
   };

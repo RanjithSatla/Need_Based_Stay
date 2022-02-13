@@ -73,4 +73,4 @@ verifyToken = (req, res, next) => {
     isAdmin,
     isModerator
   };
-  module.exports = authJwt;
+  module.authJwt = authJwt();
