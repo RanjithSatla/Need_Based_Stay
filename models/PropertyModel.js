@@ -68,9 +68,9 @@ const propertySchema = new mongoose.Schema({
       max: { type: Number, min: 0 },
     },
   },
-  uploadImages: {
-    data: Buffer,
-    contentType: String, // ('image/png'),
+  propertyImage: {
+    type: String,
+    // ('image/png'),
   },
   nearBy: {
     type: Array,

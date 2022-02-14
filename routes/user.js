@@ -6,17 +6,6 @@ const express = require("express");
 const controller = require("../controllers/authController");
 const router = express.Router();
 
-router.use ((res,req,next) =>{
- res.header(
-  "Access-Control-Allow-Headers",
-  "x-access-token, Origin, Content-Type, Accept"
-
-  );
-  next();
-});
-
-
-
 //user signup
 router.post(
   "/auth/signup",

@@ -39,7 +39,7 @@ const filterAll = (req, res, next) => {
 
   const query = Property.find(filter)
     .select(
-      "propertyName propertyLocation  uploadImages gender nearBy description"
+      "propertyName propertyLocation  propertyImage gender nearBy description"
     )
     .skip(pageOptions.page * pageOptions.limit)
     .limit(pageOptions.limit)
@@ -54,6 +54,7 @@ const filterAll = (req, res, next) => {
               propertyType: Property.propertyType,
               propertyLocation: Property.propertyLocation,
               locationType: Property.locationType,
+              propertyImage: Property.propertyImage,
               gender: Property.gender,
               preference: Property.preference,
               roomType: Property.roomType,
@@ -71,8 +72,8 @@ const filterAll = (req, res, next) => {
             };
           }),
         };
-        // console.log(response);
-        return res.status(200).json(response);
+        console.log(response);
+        return res.status(200).json(Property);
       } else {
         res.status(404).json({ message: "No Properties found" });
       }
@@ -101,7 +102,7 @@ const locationFilter = async (req, res, next) => {
   const query = Property.find({
     location: {
       $near: {
-        $maxDistance: 10000, //$maxDistance” is the distance in meters from the longitude and latitude values.
+        $maxDistance: 100000, //$maxDistance” is the distance in meters from the longitude and latitude values.
         $geometry: {
           type: "Point",
           coordinates: [lat, lang],

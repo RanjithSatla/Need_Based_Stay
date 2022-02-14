@@ -1,12 +1,13 @@
 const Property = require("../models/PropertyModel");
-
+// const multer = require("multer");
+// const upload = multer({ dest: "uploads/" });
 //create Property :
 
 const createProperty = async (req, res, next) => {
+  console.log(req.file);
   const property = new Property({
     propertyName: req.body.propertyName,
     location: req.body.location,
-    // [(lat = req.body.lat), (lang = req.body.lng)],
     propertyLocation: req.body.propertyLocation,
     propertyType: req.body.propertyType,
     locationType: req.body.locationType,
@@ -17,7 +18,7 @@ const createProperty = async (req, res, next) => {
     houseType: req.body.houseType,
     priceRange: req.body.priceRange,
     houseFor: req.body.houseFor,
-    uploadImages: req.body.uploadImages,
+    propertyImage: req.file.path,
     nearBy: req.body.nearBy,
     description: req.body.description,
   });
