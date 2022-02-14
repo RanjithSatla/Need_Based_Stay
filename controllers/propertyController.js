@@ -4,7 +4,6 @@ const Property = require("../models/PropertyModel");
 //create Property :
 
 const createProperty = async (req, res, next) => {
-  console.log(req.file);
   const property = new Property({
     propertyName: req.body.propertyName,
     location: req.body.location,
@@ -18,10 +17,11 @@ const createProperty = async (req, res, next) => {
     houseType: req.body.houseType,
     priceRange: req.body.priceRange,
     houseFor: req.body.houseFor,
-    propertyImage: req.file.path,
     nearBy: req.body.nearBy,
     description: req.body.description,
+    propertyImage: req.files.map((a) => a.path),
   });
+
   try {
     const propertyData = await property.save();
     console.log(propertyData);

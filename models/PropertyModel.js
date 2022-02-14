@@ -69,7 +69,7 @@ const propertySchema = new mongoose.Schema({
     },
   },
   propertyImage: {
-    type: String,
+    type: Array,
     // ('image/png'),
   },
   nearBy: {

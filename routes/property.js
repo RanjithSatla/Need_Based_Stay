@@ -35,7 +35,7 @@ const upload = multer({
 //createProperty
 router.post(
   "/owner/listproperty",
-  upload.single("propertyImage"),
+  upload.array("propertyImage", 10),
   listingProperty.createProperty
 );
 router.get("/property/:propertyId", listingProperty.individualProperty);
