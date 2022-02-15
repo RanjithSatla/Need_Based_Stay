@@ -2,7 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
+
+
 const db  = require("../models");
 const Role = db.role;
 
@@ -10,7 +12,7 @@ const Role = db.role;
 
 const CONNECTION_URL = process.env.mongo_url;
 //Connect to DB:
-mongoose.connect(CONNECTION_URL, {
+db.mongoose.connect(CONNECTION_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -42,12 +44,12 @@ function initial() {
         console.log("added 'user' to roles collection");
       });
       new Role({
-        name: "moderator"
+        name: "owner"
       }).save(err => {
         if (err) {
           console.log("error", err);
         }
-        console.log("added 'moderator' to roles collection");
+        console.log("added 'owner' to roles collection");
       });
       new Role({
         name: "admin"
@@ -59,7 +61,7 @@ function initial() {
       });
     }
   });
-}
+};
 
 
 module.exports = mongoose;

@@ -13,7 +13,8 @@ exports.middlewares = [
   cors,
   parseURI,
   parseJSON,
-  //   tokenVerify,
-  //   checkUsername,
-  //   checkRole,
+
+     tokenVerify,
+    checkUsername,
+     checkRole
 ];
