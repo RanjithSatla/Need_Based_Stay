@@ -1,7 +1,7 @@
 const verifySignUp = require("../middlewares/verifySignup");
 const controller = require("../controllers/authController");
 // const express = require("express");
-// const router = express.Router();
+const router = express.Router();
 module.exports = function(app){
     app.use(function(req, res, next) {
       res.header(
