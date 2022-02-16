@@ -9,10 +9,19 @@ const createUser = async (req, res, next) => {
     userName: req.body.userName,
     password: req.body.password,
   });
+  // check required fields
+  if(!firstName, !lastName, !emailId, !phoneNumber, !userName, !password){
+    error.push({ msg: 'Required fields missing'});
+  }
+
   try {
-    const userData = await user.save();
-    console.log(userData);
-    res.json(userData);
+    const userData = await user.save()
+      .then(user=> {
+        res.render('/user/login');
+        console.log(userData);
+        res.json(userData);
+      })
+   
   } catch (error) {
     res.json({
       message: "An error occurred",
