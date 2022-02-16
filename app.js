@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const { middlewares } = require("./middlewares");
+const session = require("express-session");
 const db = require("./config/db");
 
 // const port = process.env.PORT || 3000;
@@ -13,8 +14,18 @@ const propertyRoute = require("./routes/property");
 const filterRoute = require("./routes/filterRoute");
 // console.log(middlewares);
 
+//middlewares
 app.use(middlewares);
-// app.use("./uploads", express.static("__dirname + '/uploads"));
+app.use(
+  session({
+    secret:"secret",
+    resave:false,
+    saveUnintialized:false
+  })
+  )
+
+
+  // app.use("./uploads", express.static("__dirname + '/uploads"));
 app.use("/api", (req, res, next) => {
   res.status(200).json({
     message: "Hello from Backend Server",
