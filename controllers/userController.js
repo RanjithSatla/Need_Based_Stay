@@ -24,7 +24,7 @@ const login = (req, res, next) => {
   var username = req.body.username;
   var password = req.body.password;
 
-  User.findOne({ userName: req.body.username }). exec ((error, foundUser) => {
+  User.findOne({ userName: req.body.username }).exec((error, foundUser) => {
     if (!error) {
       if (foundUser) {
         //----compare passwords-----//
@@ -43,23 +43,22 @@ const login = (req, res, next) => {
       res.json(error);
     }
   });
- // emailId
+  // emailId
   User.findOne({
-   emailId: req.body.emailId}).exec((error, foundUser) => {
-     if (error) {
-       res.status(500).send({ message: error });
-       return;
+    emailId: req.body.emailId,
+  }).exec((error, foundUser) => {
+    if (error) {
+      res.status(500).send({ message: error });
+      return;
+    }
+    if (foundUser) {
+      res.status(200).send({ message: "user found by mail" });
+    } else {
+      res.json("You've not been registered as a user. Please do SignUp !!!");
+    }
 
-     }
-     if (foundUser) {
-       res.status(200).send({ message: "user found by mail"});
-     } else {
-       res.json("You've not been registered as a user. Please do SignUp !!!");
-     }
-
-  next()     
-   });
-
+    next();
+  });
 };
 
 module.exports = { createUser, login };

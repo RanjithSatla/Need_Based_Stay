@@ -6,7 +6,6 @@ const db = require("./config/db");
 // const port = process.env.PORT || 3000;
 
 //routes
- require("./routes/authRoutes")(app);
 const userRoute = require("./routes/user");
 const ownerRoute = require("./routes/owner");
 const propertyRoute = require("./routes/property");
@@ -21,11 +20,10 @@ app.use("/api", (req, res, next) => {
   });
   next();
 });
-app.use("/", userRoute);
+// app.use("/", userRoute);
 app.use("/", ownerRoute);
 app.use("/", propertyRoute);
 app.use("/", filterRoute);
-// app.use("/",authRoute);
 
 const server = app.listen(process.env.PORT || 5000, () => {
   const port = server.address().port;
@@ -35,4 +33,3 @@ const server = app.listen(process.env.PORT || 5000, () => {
 // app.listen(port, () => {
 //   console.log(`listening on port ${port}`);
 // });
-module.exports= app;

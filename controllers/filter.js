@@ -27,7 +27,7 @@ const filterAll = (req, res, next) => {
       delete filter.nearBy;
     }
   }
-  console.log(filter.nearBy);
+  // console.log(filter.nearBy);
 
   console.log(filter);
 
