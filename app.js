@@ -18,21 +18,21 @@ const filterRoute = require("./routes/filterRoute");
 app.use(middlewares);
 app.use(
   session({
-    secret:"secret",
-    resave:false,
-    saveUnintialized:false
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
   })
-  )
+);
+// console.log(session.saveUnintialized);
 
-
-  // app.use("./uploads", express.static("__dirname + '/uploads"));
+// app.use("./uploads", express.static("__dirname + '/uploads"));
 app.use("/api", (req, res, next) => {
   res.status(200).json({
     message: "Hello from Backend Server",
   });
   next();
 });
-// app.use("/", userRoute);
+app.use("/", userRoute);
 app.use("/", ownerRoute);
 app.use("/", propertyRoute);
 app.use("/", filterRoute);
@@ -45,4 +45,4 @@ const server = app.listen(process.env.PORT || 5000, () => {
 // app.listen(port, () => {
 //   console.log(`listening on port ${port}`);
 // });
-module.exports =app;
+module.exports = app;

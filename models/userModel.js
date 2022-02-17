@@ -28,15 +28,9 @@ const userSchema = new mongoose.Schema({
   roles: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Role'
-    }
-  ]
- });
-
-// userSchema.method("toJSON", function() {
-//   const { __v, _id, ...object } = this.toObject();
-//   object.id = _id;
-//   return object;
-// });
+      ref: "Role",
+    },
+  ],
+});
 
 module.exports = mongoose.model("User", userSchema);
