@@ -19,7 +19,7 @@ const createProperty = async (req, res, next) => {
     houseFor: req.body.houseFor,
     nearBy: req.body.nearBy,
     description: req.body.description,
-    propertyImage: req.files.map((a) => a.path),
+    // propertyImage: req.files.map((a) => a.path),
   });
 
   try {
