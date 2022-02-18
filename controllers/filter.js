@@ -6,6 +6,7 @@ const Property = require("../models/PropertyModel");
 //Filter based on needs
 
 const filterAll = (req, res, next) => {
+  console.log("filterReq");
   const filter = {
     propertyType: req.body.propertyType,
     propertyLocation: req.body.propertyLocation,

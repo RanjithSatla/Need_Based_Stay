@@ -1,13 +1,16 @@
 const express = require("express");
 const app = express();
 const { middlewares } = require("./middlewares");
-const session = require("express-session");
 const db = require("./config/db");
-
+const passport = require('passport');
+ const expressSession = require('express-session');
+const flash = require('connect-flash');
+const initPassport = require("./passport/passport");
+initPassport(passport);
 // const port = process.env.PORT || 3000;
 
 //routes
-require("./routes/authRoutes")(app);
+const authRoutes = require("./routes/authRoutes")(passport);
 const userRoute = require("./routes/user");
 const ownerRoute = require("./routes/owner");
 const propertyRoute = require("./routes/property");
@@ -17,12 +20,17 @@ const filterRoute = require("./routes/filterRoute");
 //middlewares
 app.use(middlewares);
 app.use(
-  session({
+  expressSession({
     secret:"secret",
     resave:false,
-    saveUnintialized:false
+    saveUninitialized: false,
   })
-  )
+  );
+app.use(passport.initialize());
+app.use(passport.session());
+ app.use(flash);
+
+  
 
 
   // app.use("./uploads", express.static("__dirname + '/uploads"));
@@ -36,6 +44,7 @@ app.use("/api", (req, res, next) => {
 app.use("/", ownerRoute);
 app.use("/", propertyRoute);
 app.use("/", filterRoute);
+app.use("/", authRoutes);
 
 const server = app.listen(process.env.PORT || 5000, () => {
   const port = server.address().port;
