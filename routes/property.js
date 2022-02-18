@@ -2,6 +2,9 @@ const express = require("express");
 //controllers
 const listingProperty = require("../controllers/propertyController");
 
+//Auth middleware
+const checkAuth = require("../middlewares/check-auth");
+
 const router = express.Router();
 const multer = require("multer");
 
@@ -35,11 +38,20 @@ const upload = multer({
 //createProperty
 router.post(
   "/owner/listproperty",
+  checkAuth,
   upload.array("propertyImage", 10),
   listingProperty.createProperty
 );
 router.get("/property/:propertyId", listingProperty.individualProperty);
-router.patch("/property/:propertyId", listingProperty.updateProperty);
-router.delete("/property/:propertyId", listingProperty.deleteProperty);
+router.patch(
+  "/property/:propertyId",
+  checkAuth,
+  listingProperty.updateProperty
+);
+router.delete(
+  "/property/:propertyId",
+  checkAuth,
+  listingProperty.deleteProperty
+);
 
 module.exports = router;

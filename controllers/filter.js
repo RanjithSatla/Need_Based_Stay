@@ -73,7 +73,7 @@ const filterAll = (req, res, next) => {
             };
           }),
         };
-        console.log(response);
+        console.log(Property);
         return res.status(200).json(Property);
       } else {
         res.status(404).json({ message: "No Properties found" });
